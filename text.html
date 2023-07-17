@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tesst</title>
+    <style>
+        #tab-container {
+            display: flex;
+        }
+
+        .tab-button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .tab-container .tab>button.active {
+            color: #fff;
+            background: #00acee;
+            border-radius: 30px;
+        }
+
+        /* .tab-button.active {
+            border-bottom: 2px solid blue;
+        } */
+
+        .tab-content {
+            /* display: none; */
+            padding: 10px;
+        }
+
+        #product-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #load-more-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #load-more-button,
+        #hide-products-button {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tab-container">
+        <div class="tab">
+            <button class="tab-button active" onclick="showTab('products')">Danh sách sản phẩm</button>
+        </div>
+        <div class="tab">
+            <button class="tab-button" onclick="showTab('other')">Tab khác</button>
+        </div>
+    </div>
+    <div id="content-container">
+        <div id="products" class="tab-content">
+            <ul id="product-list">
+                <!-- Các mục sản phẩm sẽ được thêm vào đây -->
+            </ul>
+            <div id="load-more-container">
+                <button id="load-more-button" onclick="loadMoreProducts()">Xem thêm</button>
+                <button id="hide-products-button" onclick="hideProducts()">Ẩn</button>
+            </div>
+        </div>
+        <div id="other" class="tab-content">
+            <!-- Nội dung của tab khác sẽ được thêm vào đây -->
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>let productList = ["Sản phẩm 1", "Sản phẩm 2", "Sản phẩm 3", "Sản phẩm 4", "Sản phẩm 5", "Sản phẩm 6", "Sản phẩm 7", "Sản phẩm 8"];
+    let limit = 4;
+
+    let tabHeader = document.getElementsByClassName("tab")[0];
+    let tabBody = document.getElementsByClassName("tab-content")[0];
+    let tabsPane = tabHeader.getElementsByTagName("button");
+
+    for (let i = 0; i < tabsPane.length; i++) {
+        tabsPane[i].addEventListener("click", function () {
+            // tabHeader.getElementsByClassName("active")[0].classList.remove("active");
+            tabsPane[i].classList.add("active");
+            tabBody.getElementsByClassName("active")[0].classList.remove("active");
+            tabBody.getElementsByTagName("div")[i].classList.add("active");
+
+        });
+    }
+
+    // function showTab(tabName) {
+    //     const tabButtons = document.querySelectorAll(".tab-button");
+    //     const tabContents = document.querySelectorAll(".tab-content");
+
+    //     tabButtons.forEach(button => {
+    //         button.classList.toggle("active", button.textContent === tabName);
+    //     });
+
+    //     tabContents.forEach(content => {
+    //         content.style.display = content.id === tabName ? "block" : "none";
+    //     });
+    // }
+
+    function showProductList(products, limitToShow) {
+        const productListContainer = document.querySelector("#product-list");
+
+        productListContainer.innerHTML = "";
+
+        for (let i = 0; i < Math.min(products.length, limitToShow); i++) {
+            const product = products[i];
+
+            const listItem = document.createElement("li");
+            listItem.textContent = product;
+
+            productListContainer.appendChild(listItem);
+        }
+
+        if (limitToShow < products.length) {
+            document.getElementById("load-more-button").style.display = "block";
+            document.getElementById("hide-products-button").style.display = "none";
+        } else {
+            document.getElementById("load-more-button").style.display = "none";
+            document.getElementById("hide-products-button").style.display = "block";
+        }
+    }
+
+    function loadMoreProducts() {
+        limit += 4;
+        showProductList(productList, limit);
+    }
+
+    function hideProducts() {
+        limit = 4;
+        showProductList(productList, limit);
+    }
+
+    // Ví dụ sử dụng
+    showProductList(productList, limit);
+</script>

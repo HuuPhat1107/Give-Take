@@ -136,7 +136,7 @@ header nav {
 }
 
 .banner {
-    background: url(/images/banner.jpg);
+    background-image: url(https://res.cloudinary.com/dj5vdnbai/image/upload/v1689608188/banner_vmjqpv.jpg);
     height: 70vh;
     background-position: center;
     background-repeat: no-repeat;

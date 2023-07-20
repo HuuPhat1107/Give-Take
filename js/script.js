@@ -1,4 +1,5 @@
 //toggle menu
+
 const toggle = () => {
   const menu = document.querySelector('.bar');
   const nav = document.querySelector('.menu');
@@ -80,3 +81,14 @@ hideBtn.onclick = () => {
   hideBtn.style.display = 'none';
   loadMoreBtn.style.display = 'inline-block';
 };
+
+//carousel 
+var elem = document.querySelector('.main-carousel');
+var flkty = new Flickity( elem, {
+  // options
+  cellAlign: 'left',
+  contain: true,
+  wrapAround: true,
+  freeScroll: true,
+  pageDots: false
+});
